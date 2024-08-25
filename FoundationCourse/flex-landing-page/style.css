@@ -1,11 +1,10 @@
 @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap);
 body{
-    height: 100vh;
+    height:100vh;
     margin: 0;
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
-    color: #f9faf8; /*color would be overwritten by other more specifity declaration*/
 }
 
 ul{
@@ -13,11 +12,15 @@ ul{
     margin: 0;
     padding: 0;
 }
+
+/* HEADER */
 .header, .footer, .first-section {
     background-color: #1f2937;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #f9faf8; /*color would be overwritten by other more specifity declaration*/
+
 }
 
 .header{
@@ -36,6 +39,7 @@ ul{
     color: #e5e7eb;
 }
 
+/* GENERAL ALL SECTIONS */
 .main-container{
     flex:1;
     display: flex;
@@ -43,16 +47,16 @@ ul{
 }
 
 .section{
-    flex: 1;
-    display: flex;
-    
+    flex: 1;    
 }
+
+/* FIRST SECTIOn */
 
 .first-section{
    flex:1;
    display: flex;
-   gap: 10px;
-   padding: 24px;
+   gap: 64px;
+   padding: 64px;
 }
 
 .hero-first-col{
@@ -70,7 +74,7 @@ ul{
     border-style: none;
     border-radius: 8px;
     padding: 8px;
-    width: 25%;
+    width: 35%;
     
 }
 
@@ -79,3 +83,39 @@ ul{
     font-weight: 900;
 }
 
+/* SECOND SECTION*/
+.second-section{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+   padding: 64px;
+}
+.info-header-text{
+    font-size: 36px;
+    font-weight: 900;
+    color: #1f2937;
+}
+.cards {
+    display: flex;
+    gap: 32px;
+}
+.card{
+    max-width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-text{
+    color:gray
+}
+
+.profile-image{
+    border: 4px solid #3882f6;
+    border-radius: 16px;
+    max-width: fit-content;
+    overflow: hidden;
+}
