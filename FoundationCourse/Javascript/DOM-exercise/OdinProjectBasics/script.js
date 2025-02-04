@@ -36,3 +36,12 @@ pinkDiv.append(pinkDivHeader);
 const pinkDivPara = document.createElement("p");
 pinkDivPara.textContent = "ME TOO!";
 pinkDiv.append(pinkDivPara);
+
+// btn.addEventListener("click", () => {
+// 	alert("Hello!");
+// })
+
+btn.addEventListener("click", (e) => {
+    console.log(e.target);
+    e.target.style.backgroundColor = "blue";
+})
