@@ -94,21 +94,21 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-// 5 rounds, dont advance round incase of draw, i-=1 incase of draw
-for (let i = 0; i < 5; i++){
-  computerChoice = getComputerChoice();
-  console.log(`Computer played ${computerChoice}`)
-  humanChoice = getHumanChoice();
-  console.log(`Human played ${humanChoice}`)
+// // 5 rounds, dont advance round incase of draw, i-=1 incase of draw
+// for (let i = 0; i < 5; i++){
+//   computerChoice = getComputerChoice();
+//   console.log(`Computer played ${computerChoice}`)
+//   humanChoice = getHumanChoice();
+//   console.log(`Human played ${humanChoice}`)
 
-  if (humanChoice === computerChoice) {
-    console.log("Both human and CPU picked same, round is draw");
-    i -= 1;
-  } else{
-    playRound(humanChoice, computerChoice);
-  }
-  console.log(`Score: Human: ${humanScore}, Computer: ${computerScore} Starting next round...\n`)
-}
+//   if (humanChoice === computerChoice) {
+//     console.log("Both human and CPU picked same, round is draw");
+//     i -= 1;
+//   } else{
+//     playRound(humanChoice, computerChoice);
+//   }
+//   console.log(`Score: Human: ${humanScore}, Computer: ${computerScore} Starting next round...\n`)
+// }
 
 if (humanScore > computerScore ){
   console.log("Human won.")

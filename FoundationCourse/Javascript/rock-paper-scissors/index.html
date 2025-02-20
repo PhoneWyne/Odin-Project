@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RockPaperScissorsGame</title>
-    <script src="gameScript.js"></script>
+    <script src="gameScript.js" defer></script>
 </head>
 <body>
     <h1>Welcome to Rock Paper Scissors Game for Odin Project</h1>
-    <p>Look into browser console log to play the game</p>
-    
+    <p>Player will press a button, and cpu will make their move.</p>
+    <p>First to 5 wins a round</p>
+    <!-- can bubble up rock, paper, scissor events to handle them all in 1, instead of multiple event handlers -->
+    <div id="player-choice">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissor">Scissor</button>
+    </div>
 </body>
 </html>
