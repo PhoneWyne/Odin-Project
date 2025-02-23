@@ -1,19 +1,23 @@
 console.log("Starting Rock Paper Scissors game!");
+// console.log(`Testing Human choice: ${getHumanChoice()}`);
+let humanScore = 5;
+let computerScore = 0;
 
 // function that maps numerical choice to string choice
 function mapChoiceToString(choice) {
   /*
   0 - Rock, 1 - Paper, Scissor - 2
   */
-  // ensure choice was int
-  choice = parseInt(choice);
+  // ensure choice was int, no need to do this, as button is selecting it
+  // choice = parseInt(choice);
   // use strict equality to ensure type matching
-  if (choice === 0) {
-    return "rock";
-  } else if (choice === 1) {
-    return "paper";
-  } else {
-    return "scissor";
+  switch (choice){
+    case 0:
+      return "rock";
+    case 1:
+      return "paper";
+    case 2:
+      return "scissor";
   }
 }
 
@@ -39,18 +43,10 @@ function getComputerChoice() {
 // console.log(getRandomValue(0, 2));
 // console.log(`Testing Computer choice: ${getComputerChoice()}`);
 
-// function to get user Choice
-function getHumanChoice() {
-  humanChoice = prompt(
-    "Please enter a number from 0 to 2, inclusive ([0] - Rock [1] - Paper [2] - Scissor) : "
-  );
-  return mapChoiceToString(humanChoice);
+
+const displayWinner = (winner, humanChoice, computerChoice) => {
+  console.log(`${winner} won this round, Human: ${humanChoice} Computer: ${computerChoice}`);
 }
-
-// console.log(`Testing Human choice: ${getHumanChoice()}`);
-let humanScore = 0;
-let computerScore = 0;
-
 // function plays a single round b/w human and computer
 // user == cpu, same choice, draw, neither gets a point
 // user = rock, cpu = scissor, user wins, cpu loses
@@ -59,59 +55,96 @@ let computerScore = 0;
 // user = paper, cpu = scissor, user loses, cpu wins
 // user = scissor, cpu = paper, user wins, cpu loses
 // user = scissor, cpu = rock, user loses, cpu wins
-function playRound(humanChoice, computerChoice) {
-
+function evaluateRound(humanChoice, computerChoice) {
+  // handle draw scenario
+  if (humanChoice == computerChoice ){
+    console.log("This round was a draw.");
+    return;
+  }
+  // handle any other scenario, win-lose for 1 side
   switch (humanChoice) {
     case "rock":
       if (computerChoice === "paper") {
-        humanScore += 1;
-        console.log(`Human won this round, Human: ${humanChoice} Computer: ${computerChoice}`)
-      } else {
         computerScore += 1;
-        console.log(`Computer won this round, Human: ${humanChoice} Computer: ${computerChoice}`)
+        displayWinner("Human", humanChoice, computerChoice);
+      } else {
+        humanScore += 1;
+        displayWinner("Computer", humanChoice, computerChoice);
       }
       break;
     case "scissor":
       if (computerChoice === "paper") {
         humanScore += 1;
-        console.log(`Human won this round, Human: ${humanChoice} Computer: ${computerChoice}`)
+        displayWinner("Human", humanChoice, computerChoice);
+
       } else {
         computerScore += 1;
-        console.log(`Computer won this round, Human: ${humanChoice} Computer: ${computerChoice}`)
+        displayWinner("Computer", humanChoice, computerChoice);
       }
       break;
     case "paper":
       if (computerChoice === "rock") {
         humanScore += 1;
-        console.log(`Human won this round, Human: ${humanChoice} Computer: ${computerChoice}`)
+        displayWinner("Human", humanChoice, computerChoice);
+
       } else {
         computerScore += 1;
-        console.log(`Computer won this round, Human: ${humanChoice} Computer: ${computerChoice}`)
+        displayWinner("Computer", humanChoice, computerChoice);
       }
       break;
     default:
-      console.log("Incorrect choices.")
+      console.log(`Incorrect human choice: ${humanChoice}`)
   }
 }
 
-// // 5 rounds, dont advance round incase of draw, i-=1 incase of draw
-// for (let i = 0; i < 5; i++){
-//   computerChoice = getComputerChoice();
-//   console.log(`Computer played ${computerChoice}`)
-//   humanChoice = getHumanChoice();
-//   console.log(`Human played ${humanChoice}`)
-
-//   if (humanChoice === computerChoice) {
-//     console.log("Both human and CPU picked same, round is draw");
-//     i -= 1;
-//   } else{
-//     playRound(humanChoice, computerChoice);
-//   }
-//   console.log(`Score: Human: ${humanScore}, Computer: ${computerScore} Starting next round...\n`)
-// }
-
-if (humanScore > computerScore ){
-  console.log("Human won.")
-} else{
-  console.log("Computer won.")
+function updateScore() {
+  const humanScorePara = document.querySelector("#human-score");
+  const computerScorePara = document.querySelector("#computer-score");
+  humanScorePara.textContent = `Human Score: ${humanScore}`;
+  computerScorePara.textContent = `Computer Score: ${computerScore}`;
 }
+
+// it can return undefined, which also evaluates to falsy values
+function checkWinner() {
+  let winner = '';
+  if(humanScore === 5){
+    winner = "Human!";
+  } else if (computerScore === 5){
+    winner ="CPU!";
+  }
+  return winner;
+}
+
+function playRound (event) {
+  // check for winner when pressed button, nd again check for winner after round is concluded
+  const winner = checkWinner();
+  if(winner){
+    const winnerText = document.querySelector("#winner");
+    winnerText.textContent = `Winner of current round is: ${winner}`
+    resetScore();
+  }
+  // console.log(event.target);
+  // since parent was div, pressing anywhere within div, kept triggering the click event as well
+  // enforce to match that target element is button
+  if(event.target.matches("button")){
+    humanChoice = event.target.id;
+    computerChoice = getComputerChoice();
+    evaluateRound(humanChoice, computerChoice);
+    updateScore();
+  }
+  
+} 
+
+function resetScore(){
+  humanScore = 0;
+  computerScore = 0;
+  updateScore();
+}
+const buttonChoice = document.querySelector('#button-choice');
+
+// bubbling of child elements upto parent element
+buttonChoice.addEventListener('click', playRound);
+
+
+const resetButton = document.querySelector('#reset');
+resetButton.addEventListener('click', resetScore);

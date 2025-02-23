@@ -10,11 +10,18 @@
     <h1>Welcome to Rock Paper Scissors Game for Odin Project</h1>
     <p>Player will press a button, and cpu will make their move.</p>
     <p>First to 5 wins a round</p>
+    <p id="winner">Winner of current round is: [Still waiting for round to finish] </p>
     <!-- can bubble up rock, paper, scissor events to handle them all in 1, instead of multiple event handlers -->
-    <div id="player-choice">
+    <div id="score-display">
+        <p id="human-score">Human Score: 0</p>
+        
+        <p id="computer-score">Computer Score: 0</p>
+    </div>
+    <div id="button-choice">
         <button id="rock">Rock</button>
         <button id="paper">Paper</button>
         <button id="scissor">Scissor</button>
     </div>
+    <button id="reset">Reset</button>
 </body>
 </html>
